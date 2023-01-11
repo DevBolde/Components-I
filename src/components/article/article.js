@@ -87,6 +87,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'No Way! I was just added as an article!',
+    date: 'Jan 1st, 2019',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -115,3 +131,41 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+const articles = document.querySelector('.articles')
+function articleMaker(articleObj){
+  let articleWrapper = document.createElement('div')
+  let articleTitle = document.createElement('h2')
+  let date = document.createElement('p')
+  let paragraph1 = document.createElement('p')
+  let paragraph2 = document.createElement('p')
+  let paragraph3 = document.createElement('p')
+  let expandButton = document.createElement('span')
+  
+  articleWrapper.appendChild(articleTitle);
+  articleWrapper.appendChild(date);
+  articleWrapper.appendChild(paragraph1);
+  articleWrapper.appendChild(paragraph2);
+  articleWrapper.appendChild(paragraph3);
+  articleWrapper.appendChild(expandButton);
+
+  articleWrapper.classList.add('article', 'article-open')
+  articleTitle.textContent = articleObj.title
+  date.textContent = articleObj.date
+  paragraph1.textContent = articleObj.firstParagraph 
+  paragraph2.textContent = articleObj.secondParagraph
+  paragraph3.textContent = articleObj.thirdParagraph
+  expandButton.classList.add('expandButton')
+  expandButton.textContent = '+'
+
+  expandButton.addEventListener('click', ()=> {
+    articleWrapper.classList.toggle('article-open')
+  })
+
+  return articleWrapper;
+}
+
+
+for(let i = 0; i < data.length; i++){
+   articles.appendChild(articleMaker(data[i]))
+}
